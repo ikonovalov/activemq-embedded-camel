@@ -1,0 +1,17 @@
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <route id="two_queue">
+            <from uri="activemq:com.acme.MyQueue"/>
+            <setHeader headerName="X_TOKEN">
+                <simple>${random(10000)}</simple>
+            </setHeader>
+            <to uri="activemq:com.acme.SomeOtherQueue"/>
+        </route>
+    </camelContext>
+
+</beans>
